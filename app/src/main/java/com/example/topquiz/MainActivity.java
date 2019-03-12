@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int GAME_ACTIVITY_REQUEST_CODE = 1;
     private TextView mGreetingText;
     private EditText mNameInput;
     private Button mPlayButton;
