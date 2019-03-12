@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class GameActivity extends AppCompatActivity {
+import java.util.Arrays;
+
+public class GameActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView mTextViewQuestion;
     private Button mButtonAnswer1;
@@ -39,6 +41,89 @@ public class GameActivity extends AppCompatActivity {
         mButtonAnswer3 = findViewById(R.id.game_activity_btn3);
         mButtonAnswer4 = findViewById(R.id.game_activity_btn4);
 
+        if (savedInstanceState != null){
+            mScore = savedInstanceState.getInt(BUNDLE_STATE_SCORE);
+            mNumberOfQuestions = savedInstanceState.getInt(BUNDLE_STATE_QUESTION);
+        }else {
+
+            mScore = 0;
+            mNumberOfQuestions = 4;
+
+        }
+        mEnableTouchEvents = true;
+
+        mQuestionBank = createQuestionBank();
+        mCurrentQuestion = mQuestionBank.getQuestion();
+        displayQuestion(mCurrentQuestion);
+
+    }
+
+    private void displayQuestion(Question question) {
+
+        mTextViewQuestion.setText(question.getQuestion());
+        mButtonAnswer1.setText(question.getChoise().get(0));
+        mButtonAnswer1.setOnClickListener(this);
+        mButtonAnswer2.setText(question.getChoise().get(1));
+        mButtonAnswer2.setOnClickListener(this);
+        mButtonAnswer3.setText(question.getChoise().get(2));
+        mButtonAnswer3.setOnClickListener(this);
+        mButtonAnswer4.setText(question.getChoise().get(3));
+        mButtonAnswer4.setOnClickListener(this);
+    }
+
+    private QuestionBank createQuestionBank() {
+
+        Question question1 = new Question("Le nom du président",
+                Arrays.asList("Macron",
+                        "Hollande",
+                        "Hulot",
+                        "Chirac"),
+                0);
+        Question question2 = new Question("La capitale française",
+                Arrays.asList("Madrid",
+                        "Rome",
+                        "Paris",
+                        "Londre"),
+                2);
+        Question question3 = new Question("Quel acteur a joué james bond",
+                Arrays.asList("Kit Harington",
+                        "Sean Connery",
+                        "Jonny Depp",
+                        "Clint Eastwood"),
+                1);
+        Question question4 = new Question("En quelle année est tombé le mur de berlin",
+                Arrays.asList("1983",
+                        "1979",
+                        "1969",
+                        "1989"),
+                3);
+        Question question5 = new Question("la début de la première guerre mondiale",
+                Arrays.asList("1914",
+                        "1915",
+                        "1916",
+                        "1918"),
+                0);
+        Question question6 = new Question("Qui a réalisé Alien",
+                Arrays.asList("Martin Scorsese",
+                        "Steven Spielberg",
+                        "Ridley Scott",
+                        "Luc Besson"),
+                2);
+        Question question7 = new Question("En quelle année Steven Spielberg a fini ses études",
+                Arrays.asList("1962",
+                        "1982",
+                        "1992",
+                        "2002"),
+                3);
+        Question question8 = new Question("en quelle année a débuté l'os Android",
+                Arrays.asList("2006",
+                        "2007",
+                        "2008",
+                        "2009"),
+                2);
+
+        return new QuestionBank(Arrays.asList(question1, question2, question3, question4,
+                question5, question6, question7, question8));
     }
 
     // Dialog box created when game is end with current score
