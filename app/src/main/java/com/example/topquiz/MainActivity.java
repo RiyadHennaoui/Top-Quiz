@@ -94,6 +94,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void greetUser() {
+        // String firstname = mPreferences.getString(PREF_KEY_FIRSTNAME, null);
+        String firstname = mUser.getFirstname();
+
+        if (null != firstname) {
+
+            // afficher son meilleur score.
+            int score = mPreferences.getInt(PREF_KEY_SCORE_1, 0);
+
+            String fulltext = "Welcome back, " + firstname
+                    + "!\nYour last score was " + score
+                    + ", will you do better this time?";
+            mGreetingText.setText(fulltext);
+            mNameInput.setText(firstname);
+            mNameInput.setSelection(firstname.length());
+            mPlayButton.setEnabled(true);
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,5 +170,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // go to new activity : ScoreActivity
+        mHistoryButton.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                // User Clicked the button
+                Intent historyActivityIntent = new Intent(MainActivity.this, ScoreActivity.class);
+                startActivity(historyActivityIntent);
+            }
+        });
+
+
     }
+
+
+
+
+
 }
+
