@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.threeten.bp.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +46,8 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+
+        Toast.makeText(this, LocalDateTime.now().toString(), Toast.LENGTH_LONG).show();
 
         mFirstname_1 = findViewById(R.id.firstname_1);
         mFirstname_2 = findViewById(R.id.firstname_2);
