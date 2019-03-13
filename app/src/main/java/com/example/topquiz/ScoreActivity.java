@@ -61,27 +61,9 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
 
 
         Button btnSortHighScore = findViewById(R.id.btn_high_score);
-
-        btnSortHighScore.setOnClickListener(this);
-
-        Collections.sort(mPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(Player o1, Player o2) {
-                return o2.getScore() - o1.getScore();
-            }
-        });
-
         Button btnSortAlpha = findViewById(R.id.btn_alpha_score);
-
+        btnSortHighScore.setOnClickListener(this);
         btnSortAlpha.setOnClickListener(this);
-
-        Collections.sort(mPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(Player o1, Player o2) {
-                return  o2.getName().compareTo(o1.getName());
-            }
-        });
-
 
     }
 
@@ -158,14 +140,37 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        Collections.sort(mPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(Player o1, Player o2) {
-                return o2.getScore() - o1.getScore();
-            }
-        });
 
-        displayPlayers();
+        switch (v.getId()){
+
+            case R.id.btn_high_score :
+
+                Collections.sort(mPlayers, new Comparator<Player>() {
+                    @Override
+                    public int compare(Player o1, Player o2) {
+                        return o2.getScore() - o1.getScore();
+                    }
+                });
+
+                displayPlayers();
+
+                break;
+
+            case R.id.btn_alpha_score :
+
+                Collections.sort(mPlayers, new Comparator<Player>() {
+                    @Override
+                    public int compare(Player o1, Player o2) {
+                        return o2.getName().compareTo(o1.getName());
+                    }
+                });
+
+                displayPlayers();
+
+                break;
+        }
+
+
     }
 
 
