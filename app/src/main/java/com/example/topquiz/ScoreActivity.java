@@ -38,21 +38,22 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
     private TextView mBestScore_5;
     private List<Player> mPlayers;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        mFirstname_1 = (TextView) findViewById(R.id.firstname_1);
-        mFirstname_2 = (TextView) findViewById(R.id.firstname_2);
-        mFirstname_3 = (TextView) findViewById(R.id.firstname_3);
-        mFirstname_4 = (TextView) findViewById(R.id.firstname_4);
-        mFirstname_5 = (TextView) findViewById(R.id.firstname_5);
-        mBestScore_1 = (TextView) findViewById(R.id.best_score_1);
-        mBestScore_2 = (TextView) findViewById(R.id.best_score_2);
-        mBestScore_3 = (TextView) findViewById(R.id.best_score_3);
-        mBestScore_4 = (TextView) findViewById(R.id.best_score_4);
-        mBestScore_5 = (TextView) findViewById(R.id.best_score_5);
+        mFirstname_1 = findViewById(R.id.firstname_1);
+        mFirstname_2 = findViewById(R.id.firstname_2);
+        mFirstname_3 = findViewById(R.id.firstname_3);
+        mFirstname_4 = findViewById(R.id.firstname_4);
+        mFirstname_5 = findViewById(R.id.firstname_5);
+        mBestScore_1 = findViewById(R.id.best_score_1);
+        mBestScore_2 = findViewById(R.id.best_score_2);
+        mBestScore_3 = findViewById(R.id.best_score_3);
+        mBestScore_4 = findViewById(R.id.best_score_4);
+        mBestScore_5 = findViewById(R.id.best_score_5);
 
         fillPlayersNameAndScore();
 
@@ -63,16 +64,26 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
 
         btnSortHighScore.setOnClickListener(this);
 
-//        Collections.sort(players, new Comparator<Player>() {
-//            @Override
-//            public int compare(Player o1, Player o2) {
-//                return o2.getScore() - o1.getScore();
-//            }
-//        });
+        Collections.sort(mPlayers, new Comparator<Player>() {
+            @Override
+            public int compare(Player o1, Player o2) {
+                return o2.getScore() - o1.getScore();
+            }
+        });
+
+        Button btnSortAlpha = findViewById(R.id.btn_alpha_score);
+
+        btnSortAlpha.setOnClickListener(this);
+
+        Collections.sort(mPlayers, new Comparator<Player>() {
+            @Override
+            public int compare(Player o1, Player o2) {
+                return  o2.getName().compareTo(o1.getName());
+            }
+        });
 
 
     }
-
 
 
     private void fillPlayersNameAndScore() {
@@ -156,28 +167,29 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
 
         displayPlayers();
     }
-}
 
-private static class Player {
 
-    private final String mName;
-    private final int mScore;
+    public static class Player {
 
-    public String getName() {
-        return mName;
+        private final String mName;
+        private final int mScore;
+
+        public String getName() {
+            return mName;
+        }
+
+        public int getScore() {
+            return mScore;
+        }
+
+        Player(String name, int score) {
+
+
+            mName = name;
+            mScore = score;
+        }
+
     }
-
-    public int getScore() {
-        return mScore;
-    }
-
-    Player(String name, int score) {
-
-
-        mName = name;
-        mScore = score;
-    }
-
 }
 
 
